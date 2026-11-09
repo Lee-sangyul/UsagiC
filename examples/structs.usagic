@@ -1,0 +1,19 @@
+#하이<stdio.h>
+#하이<stdbool.h>
+
+푸루야하 우라하 {
+    츠츠 야 *name;
+    우 age;
+    하 active;
+} Student;
+
+푸 greet(츠츠 야 *name) {
+    우라푸르르("Hello, %s!\n", name);
+}
+
+우 main(푸) {
+    Student student = {"Usagi", 13, 야하};
+    하아 (student.active) { greet(student.name); }
+    우라푸르르("size=%zu\n", 우라하아(student));
+    우라라라 0;
+}

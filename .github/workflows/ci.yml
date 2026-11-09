@@ -1,0 +1,15 @@
+name: UsagiC C11 CI
+on:
+  push:
+  pull_request:
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test GCC
+        run: make CC=gcc && make test
+      - name: Test Clang
+        run: make clean && make CC=clang && make test
+      - name: Smoke test with Clang backend
+        run: ./usagic build examples/hello.usagic --cc clang && ./examples/hello

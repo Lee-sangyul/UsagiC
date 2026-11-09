@@ -1,0 +1,7 @@
+/usagic
+/build/
+*.usagic.c
+*.exe
+*.o
+*.obj
+.DS_Store

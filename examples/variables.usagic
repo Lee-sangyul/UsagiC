@@ -1,0 +1,19 @@
+#하이<stdio.h>
+#하이<stdbool.h>
+
+우 main(푸) {
+    욱 small = 7;
+    우 count = 3;
+    우우 big = 100000L;
+    우우우우 huge = 9999999999LL;
+    나 half = 0.5f;
+    나나 pi = 3.1415926535;
+    우우나나 precise = 3.141592653589793238L;
+    야 grade = 'A';
+    하 active = 야하;
+    츠츠 야 *text = "우라 remains text";
+    우라(text);
+    우라푸르르("%hd %d %ld %lld %.1f %.3f %.3Lf %c %d\n",
+                small, count, big, huge, half, pi, precise, grade, active);
+    우라라라 0;
+}
