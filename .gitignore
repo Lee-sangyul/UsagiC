@@ -5,3 +5,10 @@
 *.o
 *.obj
 .DS_Store
+
+# Sample executables
+/examples/hello
+/examples/variables
+/examples/loops
+/examples/structs
+/examples/japanese

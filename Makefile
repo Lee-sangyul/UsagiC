@@ -8,7 +8,7 @@ usagic: src/main.c src/transpiler.c include/usagic.h
 	$(CC) $(CFLAGS) -Iinclude src/main.c src/transpiler.c -o usagic
 
 test: usagic
-	sh tests/run.sh
+	TEST_CC="$(CC)" USAGIC_BIN="$(CURDIR)/usagic" sh tests/run.sh
 
 clean:
-	rm -f usagic examples/*.usagic.c examples/hello examples/variables examples/loops examples/structs
+	rm -f usagic examples/*.usagic.c examples/hello examples/variables examples/loops examples/structs examples/japanese

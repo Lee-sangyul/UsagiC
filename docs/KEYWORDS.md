@@ -1,4 +1,4 @@
-# UsagiC v0.1.0-alpha keyword reference
+# UsagiC v0.1.1-alpha keyword reference
 
 Korean and Japanese keywords have equal status in v0.1. Established UsagiLang Japanese spellings are reused; new C-specific Japanese spellings are phonetic aliases. Korean and Japanese may be mixed in one .usagic file. The C output uses whole-token replacement, not substring replacement.
 

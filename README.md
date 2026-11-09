@@ -1,4 +1,4 @@
-# UsagiC 🐰 — v0.1.0-alpha
+# UsagiC 🐰 — v0.1.1-alpha
 
 [日本語 README](README.ja.md) · [Full keyword reference](docs/KEYWORDS.md)
 
@@ -111,3 +111,34 @@ make test
 ~~~
 
 The Japanese syntax is documented in [README.ja.md](README.ja.md). C headers still use their ordinary .h extension and are never rewritten.
+
+## v0.1.1-alpha reliability fixes
+
+- Fixed the Japanese sample's inverted preprocessor condition so its deliberately disabled #error does not trigger.
+- Input files may have an optional UTF-8 BOM, which is removed before tokenization.
+- Explicit -o output paths are protected from overwrites by default; use --force when deliberate.
+- Generated .usagic.c outputs with a valid generator header, and standard executable build outputs, can be regenerated.
+- GCC and Clang each run all integration tests using isolated temporary files.
+- CMake/CTest includes Japanese compilation and execution, plus full shell tests on Unix.
+- Windows support: cl.exe with native MSVC C11 flags and UTF-8 input, selected by --cc cl (or --cc msvc) from a Visual Studio Developer Prompt.
+- make clean now removes all supported sample executables, including the Japanese example.
+
+### Linux and macOS testing
+
+~~~sh
+make clean && make CC=gcc test
+make clean && make CC=clang test
+cmake -S . -B build
+cmake --build build
+ctest --test-dir build --output-on-failure
+~~~
+
+### Windows (Visual Studio Developer Command Prompt)
+
+~~~powershell
+cmake -S . -B build
+cmake --build build --config Release
+ctest --test-dir build -C Release --output-on-failure
+~~~
+
+To avoid accidental data loss, --force never permits overwriting the original .usagic source itself. Headers continue to use ordinary .h files, unchanged.

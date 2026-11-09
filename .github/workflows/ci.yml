@@ -3,13 +3,28 @@ on:
   push:
   pull_request:
 jobs:
-  build-and-test:
+  linux:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cc: [gcc, clang]
     steps:
       - uses: actions/checkout@v4
-      - name: Test GCC
-        run: make CC=gcc && make test
-      - name: Test Clang
-        run: make clean && make CC=clang && make test
-      - name: Smoke test with Clang backend
-        run: ./usagic build examples/hello.usagic --cc clang && ./examples/hello
+      - name: Build and test with selected compiler
+        run: make CC=${{ matrix.cc }} test
+      - name: CMake and CTest integration
+        run: |
+          cmake -S . -B build -DCMAKE_C_COMPILER=${{ matrix.cc }}
+          cmake --build build
+          ctest --test-dir build --output-on-failure
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Build with MSVC
+        run: |
+          cmake -S . -B build -A x64
+          cmake --build build --config Release
+      - name: CTest with native MSVC backend
+        run: ctest --test-dir build -C Release --output-on-failure

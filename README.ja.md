@@ -1,4 +1,4 @@
-# UsagiC v0.1.0-alpha — 日本語ガイド
+# UsagiC v0.1.1-alpha — 日本語ガイド
 
 [English / 한국어](README.md) · [完全なキーワード表](docs/KEYWORDS.md)
 
@@ -144,4 +144,14 @@ make test
 
 文字列・文字リテラル・コメント・インクルードパスの中身は変換しません。v0.1 は完全な C パーサーではなく、C の構文や型の検証は GCC / Clang に任せます。信頼できない C コードの実行は避けてください。
 
-MIT License · v0.1.0-alpha (experimental)
+MIT License · v0.1.1-alpha (experimental)
+
+## v0.1.1-alpha 修正内容
+
+- 日本語サンプル内の条件付きコンパイルを修正し、無効化されるべき #error が実行されなくなりました。
+- UTF-8 BOM 付きの .usagic ソースを利用できます。
+- 明示的な -o 出力先が既存ファイルの場合は標準で上書きを拒否します。必要な場合のみ --force を指定してください。
+- GCC と Clang の双方で全テストを実行でき、CMake/CTest に日本語コンパイルと実行テストを登録しました。
+- Visual Studio の開発者用コマンドプロンプトでは --cc cl または --cc msvc を指定できます。
+- make clean で日本語サンプルの生成物も消去します。
+- C ヘッダーは従来通り .h を使い、ヘッダー内部を翻訳しません。
