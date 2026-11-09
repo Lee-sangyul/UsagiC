@@ -1,0 +1,44 @@
+#ハイ<stdio.h>
+#ハイ<stdbool.h>
+#プルャ LIMIT 4
+#ハァ LIMIT == 4
+#プルャ ENABLED 1
+#フゥン
+#プルャ ENABLED 0
+#サクッ
+#ハァイヤ NOT_DEFINED
+#ヤダ This should be disabled
+#サクッ
+
+プルヤハ ウラハ {
+    ツツ ヤ *name;
+    ウ age;
+} Student;
+
+プ greet(ツツ ヤ *name) {
+    ウラプルル("こんにちは、%s！\n", name);
+}
+
+ウ main(プ) {
+    Student student = {"うさぎ", 13};
+    ハ active = ヤハ;
+    ウウウウ big = 999LL;
+    ウウナナ precise = 1.25L;
+
+    ハァ (active) { greet(student.name); }
+    フゥン { ウラ("inactive"); }
+
+    ツツウラウラ (ウ i = 0; i < LIMIT; ++i) {
+        ハァ (i == 1) { プワッ; }
+        ハァ (i == 3) { サクッ; }
+        ウラプルル("count=%d\n", i);
+    }
+    ウ n = 0;
+    プルルルル (n < 2) { ++n; }
+    ハァハァ (n) {
+        ヤハウ 2: ウラ("ヤハ！"); サクッ;
+        フゥンハ: ウラ("error");
+    }
+    ウラプルル("long long=%lld, long double=%.2Lf\n", big, precise);
+    ウラララ 0;
+}

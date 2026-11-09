@@ -31,7 +31,40 @@ static const Keyword keywords[] = {
     {"ヤハ", "true"}, {"ウーラーヤハヤハ", "false"}, {"ナイナイ", "NULL"},
     {"ハァ", "if"}, {"フゥン", "else"},
     {"プルルルル", "while"}, {"ツツウラウラ", "for"},
-    {"ウラララ", "return"}, {"サクッ", "break"}, {"プワッ", "continue"}
+    {"ウラララ", "return"}, {"サクッ", "break"}, {"プワッ", "continue"},
+    /* New Japanese spellings for C-only constructs. */
+    {"ウ", "int"},
+    {"ウク", "short"},
+    {"ウウ", "long"},
+    {"ウウウウ", "long long"},
+    {"ナ", "float"},
+    {"ナナ", "double"},
+    {"ウウナナ", "long double"},
+    {"ヤ", "char"},
+    {"プ", "void"},
+    {"ハ", "bool"},
+    {"ツツ", "const"},
+    {"ウヤ", "unsigned"},
+    {"ヤウ", "signed"},
+    {"プルッ", "static"},
+    {"ハウ", "extern"},
+    {"プルプル", "volatile"},
+    {"プヤ", "inline"},
+    {"ヨッ", "restrict"},
+    {"ウラハ", "struct"},
+    {"プルヤハ", "typedef"},
+    {"ヤハヤ", "enum"},
+    {"ウラウ", "union"},
+    {"ウラハァ", "sizeof"},
+    {"ハァハァ", "switch"},
+    {"ヤハウ", "case"},
+    {"フゥンハ", "default"},
+    {"プルハ", "do"},
+    {"ウラッ", "goto"},
+    {"ウラプルル", "printf"},
+    {"ハイヤハウナ", "scanf"},
+    {"ウナヤハヤハ", "false"},
+    {"ウラヤハヤハ", "false"}
 };
 
 static const Keyword directives[] = {
@@ -41,7 +74,19 @@ static const Keyword directives[] = {
     {"하아이야", "ifndef"}, {"후웅하", "elif"},
     {"후웅", "else"}, {"사쿠", "endif"},
     {"우나", "undef"}, {"야다", "error"},
-    {"푸야하", "pragma"}
+    {"푸야하", "pragma"},
+    /* Japanese C-preprocessor aliases. */
+    {"プルャ", "define"},
+    {"プルヤ", "define"},
+    {"ハァ", "if"},
+    {"ハァヤハ", "ifdef"},
+    {"ハァイヤ", "ifndef"},
+    {"フゥンハ", "elif"},
+    {"フゥン", "else"},
+    {"サクッ", "endif"},
+    {"ウナ", "undef"},
+    {"ヤダ", "error"},
+    {"プヤハ", "pragma"}
 };
 
 typedef struct { char *data; size_t size, cap; } Buffer;

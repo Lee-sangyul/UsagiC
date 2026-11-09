@@ -68,7 +68,7 @@ UsagiC follows C syntax for parentheses, braces, semicolons, arrays and pointers
 | puts | 우라 | printf | 우라푸르르 |
 | scanf | 하이야하우나 | #include | #하이 |
 
-C headers and C standard-library functions such as malloc, free and strlen are left unchanged. A subset of the official UsagiLang Japanese keyword spellings is also accepted (see full reference).
+C headers and C standard-library functions such as malloc, free and strlen are left unchanged. Every UsagiC keyword has a Korean and a Japanese spelling, and both scripts can be mixed in one source file. UsagiLang-compatible commands preserve their existing Japanese names.
 
 **Important:** In C11, bool, true and false require the standard header stdbool.h. UsagiC's 우라 calls puts (one string and an automatic newline), whereas 우라푸르르 calls printf (format-string arguments). 하이야하우나 maps to scanf, *not* the independent UsagiLang input helper.
 
@@ -86,3 +86,28 @@ ctest --test-dir build --output-on-failure
 The repository includes compile-and-run examples, lexer tests, CMake and GCC/Clang CI. MIT licensed. This is experimental software; do not execute untrusted native C code.
 
 UsagiC is part of the **Usagi Language Family**, related to but separate from [UsagiLang](https://github.com/Lee-sangyul/UsagiLang).
+
+## Japanese syntax / 日本語構文
+
+Japanese spellings work in the transpiler, not only in documentation:
+
+~~~c
+#ハイ<stdio.h>
+
+ウ main(プ) {
+    ウラ("ヤハ！");
+    ウラプルル("数: %d\n", 42);
+    ハァ (42 > 0) { ウラ("OK"); }
+    ウラララ 0;
+}
+~~~
+
+Try the complete Japanese-only test program:
+
+~~~sh
+./usagic build examples/japanese.usagic
+./examples/japanese
+make test
+~~~
+
+The Japanese syntax is documented in [README.ja.md](README.ja.md). C headers still use their ordinary .h extension and are never rewritten.

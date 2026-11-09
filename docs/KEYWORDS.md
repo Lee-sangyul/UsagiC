@@ -1,6 +1,6 @@
 # UsagiC v0.1.0-alpha keyword reference
 
-The **Korean spellings** are the primary spelling for v0.1. Existing UsagiLang Japanese spellings are additionally accepted where listed. The C output uses whole-token replacement, not substring replacement.
+Korean and Japanese keywords have equal status in v0.1. Established UsagiLang Japanese spellings are reused; new C-specific Japanese spellings are phonetic aliases. Korean and Japanese may be mixed in one .usagic file. The C output uses whole-token replacement, not substring replacement.
 
 ## Types and qualifiers
 
@@ -88,3 +88,66 @@ Header names and content are preserved: #하이<stdio.h> maps to #include<stdio.
 - Original UsagiLang try/catch keywords are not available in standard C11, so they are intentionally excluded in v0.1.
 - v0.1 is a lexer-based transpiler, not a complete C parser, type checker or sandbox.
 - UTF-8 Japanese and Korean keywords can be used in source, but Windows compiler console/encoding configuration may vary.
+
+
+## Japanese and Korean complete equivalence table
+
+| C | Japanese (日本語) | Korean (한국어) |
+|---|---|---|
+| short | ウク | 욱 |
+| int | ウ | 우 |
+| long | ウウ | 우우 |
+| long long | ウウウウ | 우우우우 |
+| float | ナ | 나 |
+| double | ナナ | 나나 |
+| long double | ウウナナ | 우우나나 |
+| char | ヤ | 야 |
+| void | プ | 푸 |
+| bool | ハ | 하 |
+| const | ツツ | 츠츠 |
+| unsigned | ウヤ | 우야 |
+| signed | ヤウ | 야우 |
+| static | プルッ | 푸룻 |
+| extern | ハウ | 하우 |
+| volatile | プルプル | 푸루푸르 |
+| inline | プヤ | 푸야 |
+| restrict | ヨッ | 욧 |
+| struct | ウラハ | 우라하 |
+| typedef | プルヤハ | 푸루야하 |
+| enum | ヤハヤ | 야하야 |
+| union | ウラウ | 우라우 |
+| sizeof | ウラハァ | 우라하아 |
+| if | ハァ | 하아 |
+| else | フゥン | 후웅 |
+| while | プルルルル | 푸루루루루 |
+| for | ツツウラウラ | 츠츠우라우라 |
+| return | ウラララ | 우라라라 |
+| break | サクッ | 사쿠 |
+| continue | プワッ | 푸왓 |
+| switch | ハァハァ | 하아하아 |
+| case | ヤハウ | 야하우 |
+| default | フゥンハ | 후웅하 |
+| do | プルハ | 푸루하 |
+| goto | ウラッ | 우랏 |
+| puts | ウラ | 우라 |
+| printf | ウラプルル | 우라푸르르 |
+| scanf | ハァヤハウラ / ハイヤハウナ | 하아야하우라 / 하이야하우나 |
+| true | ヤハ | 야하 |
+| false | ウーラーヤハヤハ | 우나야하야하 |
+| NULL | ナイナイ | 나이나이 |
+
+| C preprocessor | Japanese (日本語) | Korean (한국어) |
+|---|---|---|
+| #include | #ハイ | #하이 |
+| #define | #プルャ | #푸루야 |
+| #if | #ハァ | #하아 |
+| #ifdef | #ハァヤハ | #하아야하 |
+| #ifndef | #ハァイヤ | #하아이야 |
+| #elif | #フゥンハ | #후웅하 |
+| #else | #フゥン | #후웅 |
+| #endif | #サクッ | #사쿠 |
+| #undef | #ウナ | #우나 |
+| #error | #ヤダ | #야다 |
+| #pragma | #プヤハ | #푸야하 |
+
+Japanese-only and mixed-script compile tests live in examples/japanese.usagic and tests/run.sh. Existing standard C .h headers remain untranslated.

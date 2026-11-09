@@ -44,4 +44,68 @@ if "$BIN" transpile "$TMP/bad.usagic" -o "$TMP/bad.c" > "$TMP/error.out" 2>&1; t
 fi
 grep -F 'unterminated literal' "$TMP/error.out" >/dev/null
 
-echo 'All UsagiC v0.1 tests passed.'
+
+# Japanese-only program (compile AND execute)
+"$BIN" build examples/japanese.usagic -o "$TMP/japanese" >/dev/null
+"$TMP/japanese" > "$TMP/japanese.out"
+grep -F 'こんにちは、うさぎ！' "$TMP/japanese.out" >/dev/null
+grep -F 'count=0' "$TMP/japanese.out" >/dev/null
+grep -F 'count=2' "$TMP/japanese.out" >/dev/null
+grep -F 'ヤハ！' "$TMP/japanese.out" >/dev/null
+grep -F 'long long=999, long double=1.25' "$TMP/japanese.out" >/dev/null
+
+# Whole-token aliases + Japanese preprocessor aliases
+cat > "$TMP/keywords.usagic" <<'JAPANESE_TOKENS'
+#ハイ<stdio.h>
+#プルャ VALUE 1
+#ハァ VALUE
+#ハァヤハ VALUE
+#フゥンハ VALUE == 0
+#フゥン
+#サクッ
+#サクッ
+#ハァイヤ UNKNOWN
+#ヤダ should be skipped
+#サクッ
+#ウナ VALUE
+#プヤハ once
+ウ ウク ウウ ウウウウ ナ ナナ ウウナナ
+ヤ プ ハ ツツ ウヤ ヤウ プルッ ハウ プルプル プヤ ヨッ
+ウラハ プルヤハ ヤハヤ ウラウ ウラハァ
+ハァハァ ヤハウ フゥンハ プルハ ウラッ ウラプルル ハイヤハウナ
+ヤハ ウナヤハヤハ ウラヤハヤハ ナイナイ
+JAPANESE_TOKENS
+"$BIN" transpile "$TMP/keywords.usagic" -o "$TMP/keywords.c" >/dev/null
+grep -F '#include<stdio.h>' "$TMP/keywords.c" >/dev/null
+grep -F '#define VALUE 1' "$TMP/keywords.c" >/dev/null
+grep -F '#ifdef VALUE' "$TMP/keywords.c" >/dev/null
+grep -F '#ifndef UNKNOWN' "$TMP/keywords.c" >/dev/null
+grep -F '#elif VALUE == 0' "$TMP/keywords.c" >/dev/null
+grep -F '#undef VALUE' "$TMP/keywords.c" >/dev/null
+grep -F '#pragma once' "$TMP/keywords.c" >/dev/null
+cat > "$TMP/expected-keywords" <<'EXPECTED_TOKENS'
+int short long long long float double long double
+char void bool const unsigned signed static extern volatile inline restrict
+struct typedef enum union sizeof
+switch case default do goto printf scanf
+true false false NULL
+EXPECTED_TOKENS
+grep -E '^(int short|char void|struct typedef|switch case|true false)' "$TMP/keywords.c" > "$TMP/actual-keywords"
+diff -u "$TMP/expected-keywords" "$TMP/actual-keywords"
+
+# Korean and Japanese keywords mixed in the same file
+cat > "$TMP/mixed.usagic" <<'MIXED_SOURCE'
+#ハイ<stdio.h>
+// ウラ should remain unchanged in comments
+ウ main(푸) {
+    ツツ ヤ *message = "ウラ 우라 ハァ 하아";
+    우라(message);
+    ウラララ 0;
+}
+MIXED_SOURCE
+"$BIN" build "$TMP/mixed.usagic" -o "$TMP/mixed" >/dev/null
+"$TMP/mixed" > "$TMP/mixed.out"
+grep -Fx 'ウラ 우라 ハァ 하아' "$TMP/mixed.out" >/dev/null
+grep -F '// ウラ should remain unchanged' "$TMP/mixed.usagic.c" >/dev/null
+
+echo 'All UsagiC v0.1 tests passed (Korean + Japanese).'
